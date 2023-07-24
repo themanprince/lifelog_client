@@ -1,0 +1,13 @@
+.whole-shit {
+	inline-size: 100%;
+}
+.input-title {
+	font-size: .8rem;
+}
+.input-input {
+	inline-size: 100%;
+	border-radius: 0.785rem;
+}
+.input-input:focus {
+	outline: 0;
+}

@@ -1,0 +1,31 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin: 0;
+	overflow: hidden;
+}
+
+/*500px used below is only for testing sake*/
+@media(min-width: 500px) {
+	.card {
+		--top-margin: 3vh; /*so I can calc its height later on*/
+		--bottom-margin: 1vh;
+		flex-direction: row;
+		border-radius: 40px;
+		margin-inline: 6vw;
+		margin-block-start: var(--top-margin);
+		margin-block-end: var(--bottom-margin);
+		block-size: calc(100vh - var(--top-margin) + var(--bottom-margin));
+		box-shadow: 3px 3px 15px rgba(0, 0, 0, .3);
+	}
+	
+	.card > * {
+		flex: 50%;
+	}
+	
+	.card > *:nth-child(1) {
+		align-self: center;
+	}
+
+}

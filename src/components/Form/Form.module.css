@@ -1,0 +1,19 @@
+.row-container {
+	/*abrg nur delete this block abeg*/
+}
+.form-container {
+	/*padding whole form left and right*/
+	padding-inline-start: var(--form-padding) !important;
+	padding-inline-end: var(--form-padding) !important;
+}
+.form-name { /*dont show in mobile view*/
+	display: none;
+}
+
+@media(min-width: 500px) {
+	.form-name {
+		display: block;
+		font-size: 4rem;
+		text-align: center;
+	}
+}

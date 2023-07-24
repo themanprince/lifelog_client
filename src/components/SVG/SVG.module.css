@@ -1,0 +1,54 @@
+.svg-contain {
+	--bg-height: 10vh; /*for that absolutely positioned div that forms the bg*/
+	--blob-distance-from-top: calc(var(--bg-height) * (20/100)); /*20% of bg height... cus blobs absolutely positioned*/
+	--size-of-bottom-margin: 70px;
+	
+	block-size: calc(var(--bg-height) + var(--size-of-bottom-margin));
+}
+
+.bg {
+	position: relative; /*so that no matter how shit changes, space will still be left for this bitch*/
+	inline-size: 100vw;
+	block-size: var(--bg-height);
+	z-index: -1;
+}
+.complementary-bg {
+	block-size: 100%;
+	background-color: black;
+}
+
+.blob {
+	position: absolute;
+	top: var(--blob-distance-from-top);
+	left: 50%;
+	transform: translateX(-50%) rotate(180deg);
+	inline-size: 70vw;
+	block-size: 20vh;
+}
+
+.life-and-log { /*the container*/
+	display: flex;
+	inline-size: 35%;
+	block-size: fit-content;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);/*translateY has that val because el is positioned relatively, it starts under the space
+	that was posed to be for shit before it. So I had to take it up a little*/
+}
+.life, .log {
+	inline-size: 100%;
+}
+
+/*
+media queries next
+500px used is just for testing... actual breakpoint finna be different
+*/
+@media(min-width: 500px) {
+	.blob,.bg {
+		display: none;
+	}
+	.life-and-log {
+		flex-direction: column;
+		inline-size: 100%;
+	}
+}
