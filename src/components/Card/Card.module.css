@@ -18,6 +18,8 @@
 		margin-block-end: var(--bottom-margin);
 		block-size: calc(100vh - var(--top-margin) + var(--bottom-margin));
 		box-shadow: 3px 3px 15px rgba(0, 0, 0, .3);
+		background-color: var(--first-color);
+
 	}
 	
 	.card > * {

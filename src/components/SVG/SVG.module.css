@@ -1,6 +1,6 @@
 .svg-contain {
-	--bg-height: 10vh; /*for that absolutely positioned div that forms the bg*/
-	--blob-distance-from-top: calc(var(--bg-height) * (20/100)); /*20% of bg height... cus blobs absolutely positioned*/
+	--bg-height: 15vh; /*for that absolutely positioned div that forms the bg*/
+	--blob-distance-from-top: calc(var(--bg-height) * (60/100)); /*20% of bg height... cus blobs absolutely positioned*/
 	--size-of-bottom-margin: 70px;
 	
 	block-size: calc(var(--bg-height) + var(--size-of-bottom-margin));
@@ -14,7 +14,7 @@
 }
 .complementary-bg {
 	block-size: 100%;
-	background-color: black;
+	background-color: #393939;
 }
 
 .blob {
@@ -32,7 +32,7 @@
 	block-size: fit-content;
 	position: relative;
 	left: 50%;
-	transform: translateX(-50%) translateY(-50%);/*translateY has that val because el is positioned relatively, it starts under the space
+	transform: translateX(-50%) translateY(-100%);/*translateY has that val because el is positioned relatively, it starts under the space
 	that was posed to be for shit before it. So I had to take it up a little*/
 }
 .life, .log {
@@ -49,6 +49,7 @@ media queries next
 	}
 	.life-and-log {
 		flex-direction: column;
+		transform: translate(-50%, -50%); /*CSS wont be the death of me... amen*/
 		inline-size: 100%;
 	}
 }

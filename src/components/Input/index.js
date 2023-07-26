@@ -21,13 +21,13 @@ export default class Input extends Component {
 	}
 	
 	render() {
-		const {title} = this.props;
+		const {title, type} = this.props;
 		const {value} = this.state;
 		
 		return (
 			<div className={InputStyle["whole-shit"]}>
 				<div className={InputStyle["input-title"]}>{title}</div>
-				<input className={InputStyle["input-input"]} value={value} onChange={this.onChange} />
+				<input type={type || "text"} className={InputStyle["input-input"]} value={value} onChange={this.onChange} />
 			</div>
 		);
 	}

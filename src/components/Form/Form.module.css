@@ -5,6 +5,7 @@
 	/*padding whole form left and right*/
 	padding-inline-start: var(--form-padding) !important;
 	padding-inline-end: var(--form-padding) !important;
+	
 }
 .form-name { /*dont show in mobile view*/
 	display: none;
@@ -15,5 +16,8 @@
 		display: block;
 		font-size: 4rem;
 		text-align: center;
+	}
+	.form-container {
+		background-color: var(--form-bg-on-desktop-view);
 	}
 }

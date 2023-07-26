@@ -1,0 +1,38 @@
+.whole-date {
+	--title-and-input-font-size: .8rem;
+}
+
+.title, .input {
+	font-size: var(--title-and-input-font-size);
+	opacity: .9;
+}
+.input-container {
+	inline-size: 100%;
+	border-block-end: 1px solid black;
+	display: flex;
+	justify-content: flex-start;
+	
+	/*vars*/
+	--input-width: 15%;
+}
+.input-div {
+	flex: 0 0 auto;
+	inline-size: 15%;
+}
+.input {
+	display: inline;
+	border: 0;
+	inline-size: calc(3 * var(--title-and-input-font-size));
+}
+.input:focus {
+	outline: 0;
+}
+.sep {
+	display: inline;
+}
+
+@media (min-width: 500px) {
+	.input {
+		background-color: var(--form-bg-on-desktop-view);
+	}
+}
