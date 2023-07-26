@@ -14,7 +14,8 @@
 }
 .complementary-bg {
 	block-size: 100%;
-	background-color: #393939;
+	background-color: #00aced /*#393939*/;
+	
 }
 
 .blob {

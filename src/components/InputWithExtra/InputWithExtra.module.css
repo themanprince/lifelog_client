@@ -1,0 +1,35 @@
+.title, .input, .textarea {
+	font-size: .8rem;
+	opacity: .9;
+}
+.whole-shit {
+	inline-size: 100%;
+}
+.first-part {
+	margin-block-end: 20px;
+}
+
+.input, .textarea {
+	inline-size: 100%;
+	border-width: 0;
+}
+
+.input {
+	padding-inline: .7rem;
+	padding-block: .3rem;
+	border-radius: 0.785rem;
+	background-color: var(--input-color);
+}
+
+.textarea {
+	border-block-end: 1px solid black;
+}
+.input:focus, .textarea:focus {
+	outline: 0;
+}
+
+@media(min-width: 500px) {
+	.textarea {
+		background-color: var(--form-bg-on-desktop-view);
+	}
+}
