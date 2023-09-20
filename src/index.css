@@ -20,8 +20,9 @@ body {
 }
 
 .red { /*for error panes in input fields*/
-	background-color: rgba(234, 10, 10, .4);
+	line-height: 1rem;
 }
 .red > span {
-	color: red;
+	color: rgba(234, 10, 10, .7);
+	font-size: .7rem;
 }

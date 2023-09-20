@@ -38,7 +38,7 @@ export default class DateWithErrors extends Component {
 				<DateInput ref={(obj) => this.#dateInputRef = obj} {...this.props} />
 				{(errors.length > 0) && (
 					<div className="red">
-						{errors.map((err, i) => <span key={i}>* {err}</span>)}
+						{errors.map((err, i) => <span key={i}>* {err}<br/></span>)}
 					</div>
 				)}
 			</>

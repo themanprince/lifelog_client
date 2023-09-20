@@ -55,51 +55,101 @@ export default class Register extends Component {
 	
 	//this func is for setting up validation funcs
 	#setupVali = () => {
-		//upon the fact that I only added one scrutiny func for each field,
-		//you can add more than one... yes, I'm talking to you 😒
+		
+		/*knew what I was doing here by naming funcs below*/ 
+		//also this dontBeEmpty finna be used by all so...
+		const dontBeEmpty = (value) => {
+			if(value.length === 0)
+				return {"failed": true, "message": "This field must not be empty"};
+			else
+				return {"failed": false};
+		}
 		
 		//email first
 		this.#scrutinyMap.add("email");
-		const isValidEmail =  /*knew what I was doing here by naming func*/ (value) => {
+		const isValidEmail = (value) => {
 			const regex = /.+@.+(\.\w{1,3})+/;
 			if(value.match(regex))
 				return {"failed": false};
 			else
 				return {"failed": true, "message": "Please enter a valid email"};
 		}
+		this.#addSFunc("email", dontBeEmpty);
 		this.#addSFunc("email", isValidEmail);
 		
 		//fname and lname next
 		this.#scrutinyMap.add("fname");
 		this.#scrutinyMap.add("lname");
-		let noSpaceChecker = (value) => {
+		const noSpaceChecker = (value) => {
 			if(! value.match(/\s/g))
 				return {"failed": false};
 			else
 				return {"failed": true, "message": "No space in name fields"};
 		}
+		this.#addSFunc("fname", dontBeEmpty);
 		this.#addSFunc("fname", noSpaceChecker);
+		this.#addSFunc("lname", dontBeEmpty);
 		this.#addSFunc("lname", noSpaceChecker);
 		
 		//password next
 		this.#scrutinyMap.add("password");
-		let passwordsEqual = (value) => {
+		const passwordsEqual = (value) => {
 			if(this.state.password === this.state.confPassword)
 				return {"failed": false};
 			else
 				return {"failed": true, "message": "both passwords have to be equal"}
 		}
+		this.#addSFunc("password", dontBeEmpty);
 		this.#addSFunc("password", passwordsEqual);
 		
-		//DateWithErrors Component next
-		let yearLessThanPresent = (year, month, day) => {
+		//DateWithErrors Component scrutiny functions next
+		const dateDontBeEmpty = (year, month, day) => {
+			//now, in the below if statement, you may want to ask me why I converted to string first before checking if
+			//its NaN... if you askin' that, there are three answers to that Question
+			//1. you're not an expert or intermediate js dev
+			//2. you're not Prince... or you are and your mind is elsewhere so you'll prolly delete the if statement before reading this comment
+			//3. because NaN cannot == NaN
+			if((String(year) === "NaN") || (String(month) === "NaN") || (String(day) === "NaN"))
+				return {"failed": true, "message": "year/month/day cannot be empty"}
+			else
+				return {"failed": false};
+		}
+		const yearLessThanPresent = (year, month, day) => {
 			const currYear = (new Date()).getFullYear();
 			if(year > currYear)
 				return {"failed": true, "message": "Year must be lesser than current year"}
 			else
 				return {"failed": false};
 		}
+		const validMonth = (year, month, day) => {
+			if((month < 1) || (month > 12))
+				return {"failed": true, "message": "Month of birth is not valid"};
+			else
+				return {"failed": false};
+		}
+		const validDay = (year, month, day) => {
+			const daysToMonth = new Map(); //a mapping from noOfDays to the months that have em... all in number-codes
+			daysToMonth.set(30, [9, 4, 6, 11]);
+			daysToMonth.set(31, [1, 2, 3, 5, 7, 8, 10, 12]);
+			daysToMonth.set(29, [2]);
+			let isWrong = false; //will be set to true if wrong value is set
+			for(let key of daysToMonth.keys())
+				if(daysToMonth.get(key).indexOf(month) > -1) {
+					if(day > key)
+						isWrong = true;
+					break;
+				}
+			
+			if((day < 1) || isWrong)
+				return {"failed": true, "message": "The day you entered doesn't exist for that month"};
+			else
+				return {"failed": false};
+		}
+		
+		this.#dateScrutinyList.push(dateDontBeEmpty);
 		this.#dateScrutinyList.push(yearLessThanPresent);
+		this.#dateScrutinyList.push(validMonth);
+		this.#dateScrutinyList.push(validDay);
 	}
 	
 	onInputChange = (fldName) => {
@@ -161,7 +211,7 @@ export default class Register extends Component {
 			canMakeReq = false;
 		
 		if(canMakeReq)
-			console.log("got here means all fields valid and we free to make request");
+			this.#formRef.submit();
 	}
 		
 	render() {

@@ -12,7 +12,7 @@ export default class Input extends Component {
 				<input type={type || "text"} className={InputStyle["input-input"]} value={value} onChange={onChange} />
 				{((errorMsgs !== undefined) && (errorMsgs.length > 0)) && (
 					<div className="red">
-						{ errorMsgs.map((msg, i) => <span key={i}>* {msg}</span>) }
+						{ errorMsgs.map((msg, i) => <span key={i}>* {msg}<br/></span>) }
 					</div>
 				)}
 			</div>
