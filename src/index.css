@@ -18,3 +18,10 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.red { /*for error panes in input fields*/
+	background-color: rgba(234, 10, 10, .4);
+}
+.red > span {
+	color: red;
+}

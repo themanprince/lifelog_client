@@ -8,7 +8,7 @@ export default class Login extends Component {
 		return (
 		<Card>
 			<SVG />
-			<Form formName="SIGN IN"></Form>
+			<Form action="/" formName="SIGN IN"></Form>
 		</Card>);
 	}
 }
