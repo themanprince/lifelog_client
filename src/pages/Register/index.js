@@ -7,6 +7,8 @@ import TwoInOne from "../../components/TwoInOne";
 import DateWithErrors /*this manages its own state... no lifting*/ from "../../components/DateWithErrors";
 import InputWithExtra from "../../components/InputWithExtra";
 import Button from "../../components/Button";
+import {Link} from "react-router-dom";
+import {SERVER_HOST, SERVER_PORT} from "../../LLConstants.js";
 
 class MyMap extends Map {
 	
@@ -22,8 +24,8 @@ export default class Register extends Component {
 	#formRef;
 	#dateRef;
 	
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		
 		this.#scrutinyMap = new MyMap();
 		this.#dateScrutinyList = [];
@@ -36,6 +38,13 @@ export default class Register extends Component {
 			"lname": [],
 			"password": []
 		};
+		
+		//if this page was created from a redirection after unsuccessful registration,
+		//the url gon contain some errorMsgs... esp about the username... so I'm checkin'
+		const params = new URLSearchParams(window.location.search);
+		const emailErr = params.get("emailErr");
+		
+		emailErr && errorMsgs["email"].push(emailErr);
 		
 		this.state = {
 			errorMsgs,
@@ -121,6 +130,12 @@ export default class Register extends Component {
 			else
 				return {"failed": false};
 		}
+		const yearGreaterThan1000 = (year, month, day) => {
+			if(year < 1000)
+				return {"failed": true, "message": "Year of birth is not valid"}
+			else
+				return {"failed": false};
+		}
 		const validMonth = (year, month, day) => {
 			if((month < 1) || (month > 12))
 				return {"failed": true, "message": "Month of birth is not valid"};
@@ -148,6 +163,7 @@ export default class Register extends Component {
 		
 		this.#dateScrutinyList.push(dateDontBeEmpty);
 		this.#dateScrutinyList.push(yearLessThanPresent);
+		this.#dateScrutinyList.push(yearGreaterThan1000);
 		this.#dateScrutinyList.push(validMonth);
 		this.#dateScrutinyList.push(validDay);
 	}
@@ -218,24 +234,27 @@ export default class Register extends Component {
 		return (
 		<Card>
 			<SVG />
-			<Form action="/" formName="SIGN UP" passRef={this.passRef} onSubmit={this.validateForm}>
-				<Input title="E-mail" type="email" value={this.state.email} errorMsgs={this.state.errorMsgs["email"]} onChange={this.onInputChange("email")} />
+			<Form action={`http://${SERVER_HOST}:${SERVER_PORT}/register`} formName="SIGN UP" passRef={this.passRef} onSubmit={this.validateForm}>
+				<Input name="email" title="E-mail" type="email" value={this.state.email} errorMsgs={this.state.errorMsgs["email"]} onChange={this.onInputChange("email")} />
 				
 				<TwoInOne>
-					<Input title="First Name" value={this.state.fname} errorMsgs={this.state.errorMsgs["fname"]} onChange={this.onInputChange("fname")} />
-					<Input title="Last Name"  value={this.state.lname} errorMsgs={this.state.errorMsgs["lname"]} onChange={this.onInputChange("lname")} />
+					<Input name="fname" title="First Name" value={this.state.fname} errorMsgs={this.state.errorMsgs["fname"]} onChange={this.onInputChange("fname")} />
+					<Input name="lname" title="Last Name"  value={this.state.lname} errorMsgs={this.state.errorMsgs["lname"]} onChange={this.onInputChange("lname")} />
 				</TwoInOne>
 				
 				<TwoInOne>
-					<Input title="Password" type="password"  value={this.state.password} errorMsgs={this.state.errorMsgs["password"]} onChange={this.onInputChange("password")} />
+					<Input name="password" title="Password" type="password"  value={this.state.password} errorMsgs={this.state.errorMsgs["password"]} onChange={this.onInputChange("password")} />
 					<Input title="Confirm Password" type="password"  value={this.state.confPassword} onChange={this.onInputChange("confPassword")} />
 				</TwoInOne>
 				
 				<DateWithErrors ref={(obj) => this.#dateRef = obj} title="Date Of Birth" dateFormat={[2, 2, 4]} seperator="/" formatString="dd/mm/yyyy"/>
 				
-				<InputWithExtra firstTitle="Security Question (Optional)" secondTitle="Answer" />
+				<InputWithExtra firstName="secQuestion" firstTitle="Security Question (Optional)" secondName="secAnswer" secondTitle="Answer" />
 				
-				<Button type="submit">Submit</Button>
+				<Button type="submit">Sign Up</Button>
+				
+				<div className="hac">Already Have An Account? <Link to="/login">Click Here</Link> to Log In</div>
+				<br/>
 			</Form>
 		</Card>);
 	}

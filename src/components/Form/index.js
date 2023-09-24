@@ -6,11 +6,14 @@ export default function Form({formName, action, children, onSubmit, passRef}) {
 	return (
 		<div className={`container-fluid ${FormStyle["form-container"]}`}>
 			<form
+				method="POST"
 				action={action}
 				ref={(node) => passRef(node)}
 				onSubmit={(e) => {
-					e.preventDefault();
-					onSubmit(e);
+					if(onSubmit /*if I pass in a func, then override fo me*/) {
+							e.preventDefault();
+						onSubmit(e);
+					}
 				}}
 				className={`row gy-4 ${FormStyle["row-container"]}`}
 			>

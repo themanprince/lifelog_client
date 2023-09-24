@@ -1,15 +1,12 @@
-import React, {Component} from "react";
+import React from "react";
 import InputStyle from "./Input.module.css";
 
-export default class Input extends Component {
 
-	render() {
-		const {title, type, value, onChange, errorMsgs /*gon contain an array of error msgs or be empty*/} = this.props;
-		
-		return (
+export default function Input({title, name, type, value, onChange, errorMsgs /*gon contain an array of error msgs or be empty*/}) {
+	return (
 			<div className={InputStyle["whole-shit"]}>
 				<div className={InputStyle["input-title"]}>{title}</div>
-				<input type={type || "text"} className={InputStyle["input-input"]} value={value} onChange={onChange} />
+				<input name={name || ""} type={type || "text"} className={InputStyle["input-input"]} value={value} onChange={onChange} />
 				{((errorMsgs !== undefined) && (errorMsgs.length > 0)) && (
 					<div className="red">
 						{ errorMsgs.map((msg, i) => <span key={i}>* {msg}<br/></span>) }
@@ -17,5 +14,4 @@ export default class Input extends Component {
 				)}
 			</div>
 		);
-	}
 }

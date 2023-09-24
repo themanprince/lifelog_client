@@ -26,3 +26,14 @@ body {
 	color: rgba(234, 10, 10, .7);
 	font-size: .7rem;
 }
+
+/*next is that class for shi like 'don't have an account, click here to register'*/
+.hac { /*...Have An Acc*/
+	text-align: center;
+	font-size: .75rem;
+	font-weight: 450;
+	opacity: .7;
+}
+.hac > Link {
+	color: var(--first-color);
+}

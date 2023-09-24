@@ -6,6 +6,9 @@
 	THIS IS BECAUSE IT IS IMPORTANT FOR PARSING TO OBTAIN year, month, day FOR ACCESSOR METHODS
 	...
 	ALSO MAKE SURE ITS COMPLIANT WITH THE dateFormat prop
+	
+	...
+	ANOTHER THING TO NOTE IS THAT THE formatString is used in giving 'name' to the input fields of the date node
 */
 
 
@@ -134,7 +137,7 @@ export default class DateInput extends Component {
 			
 		const {valArr} = this.state;
 		const {dateFormat, title, formatString, seperator} = this.props; //for getting number of dashes in each field
-	
+		
 		return (
 			<div className={DateStyle["whole-date"]}>
 				<div className={DateStyle.title}>{title} ({formatString})</div>
@@ -142,6 +145,7 @@ export default class DateInput extends Component {
 					{valArr.map((val, i, arr) => (
 						<div key={i} className={DateStyle["input-div"]}>
 							<input
+								name={formatString.split(seperator)[i]}
 								className={DateStyle.input}
 								type="number"
 								value={val}
