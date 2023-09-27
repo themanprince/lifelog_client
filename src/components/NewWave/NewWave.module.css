@@ -1,4 +1,8 @@
+.container {
+	block-size: var(--mobile-block-size);
+}
 .chaidDiv {
+	block-size: 100%;
 	background-color: var(--second-color);
 	padding-block: 5vh;
 }
@@ -6,11 +10,17 @@
 .chaidDiv > * {
 	inline-size: fit-content;
 	margin-inline: auto;
-	margin-block-start: 20%;
+	margin-block-start: 10%;
 }
 
 @media(min-width: 500px) {
 	.SVG {
 		display: none;
+	}
+	.chaidDiv > * {
+		margin-block-start: 100%;
+	}
+	.container {
+		block-size: 100%;
 	}
 }

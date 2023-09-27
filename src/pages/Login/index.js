@@ -7,6 +7,7 @@ import Button from "../../components/Button";
 import Form from "../../components/Form";
 import Card from "../../components/Card";
 import {Link} from "react-router-dom";
+import {ReactComponent as LifeSVG} from "./one.svg";
 import {SERVER_HOST, SERVER_PORT} from "../../LLConstants.js";
 
 export default class Login extends Component {
@@ -17,6 +18,15 @@ export default class Login extends Component {
 			"email": [],
 			"password": []
 		};
+		
+		//tryna see if any errors passed thru url
+		const params = new URLSearchParams(window.location.search);
+		const emailErr = params.get("emailErr");
+		const passwordErr = params.get("passwordErr");
+		
+		emailErr && errorMsgs["email"].push(emailErr);
+		passwordErr && errorMsgs["password"].push(passwordErr);
+		
 		
 		this.state = {
 			errorMsgs,
@@ -39,7 +49,7 @@ export default class Login extends Component {
 	render() {
 		return (
 			<Card shouldFlip={true}>
-				<NewWave waveIndex="1">
+				<NewWave mobileBlockSize="20vh" waveIndex="1">
 					<div className={LoginStyle["hac"]}>
 						Don't Have an Account?<br/>
 						<Button inlineSize="100%" backgroundColor="var(--second-color)" color="#ffffff" borderRadius="1rem">
@@ -49,6 +59,14 @@ export default class Login extends Component {
 				</NewWave>
 				<Form action={`http://${SERVER_HOST}:${SERVER_PORT}/login`}>
 					<br/>
+					<br/>
+					<div className={LoginStyle["desktop-blob"]}>
+						<NewBlob blobIndex="1">
+							<LifeSVG className={LoginStyle["life-svg"]}/>
+						</NewBlob>
+						<em>--- Log  ---</em>
+						<br/>
+					</div>
 					<InputNoKini name="email" title="Your Email" type="email" value={this.state.email} onChange={this.#onInputChange("email")} errorMsgs={this.state.errorMsgs["email"]} />
 					<InputNoKini name="password" title="Password" type="password" value={this.state.password} onChange={this.#onInputChange("password")} errorMsgs={this.state.errorMsgs["password"]} />
 					<div className={LoginStyle["forgot-pass"]}><Link className={LoginStyle["link"]} to="/forgot-password">Forgot Password?</Link></div>

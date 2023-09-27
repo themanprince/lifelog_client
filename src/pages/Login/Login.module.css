@@ -18,3 +18,20 @@
 	text-decoration: none;
 	color: inherit;
 }
+
+.desktop-blob {
+	display: none;
+}
+
+@media(min-width: 500px) {
+	.desktop-blob {
+		display: block;
+		text-align: center;
+		word-spacing: 1rem;
+	}
+	
+	.life-svg {
+		inline-size: 100%;
+		block-size: 100%;
+	}
+}
