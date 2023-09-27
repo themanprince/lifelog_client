@@ -1,11 +1,7 @@
 .button {
-	inline-size: 100%;
-	color: #ffffff !important;
-	background-color: var(--first-color) !important;
-	border-radius: .8rem;
 	padding-block: .5rem;
 	border: 0;
-	border-block-end: 2px solid rgba(0, 0, 0, .3);
+	border-block-end: 2px solid rgba(255, 255, 255, .5) /*rgba(0, 0, 0, .3)*/;
 }
 .button:active {
 	border-block: 2px inset rgba(0, 0, 0, .2);

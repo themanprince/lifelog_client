@@ -8,10 +8,10 @@ export default function Form({formName, action, children, onSubmit, passRef}) {
 			<form
 				method="POST"
 				action={action}
-				ref={(node) => passRef(node)}
+				ref={(node) => passRef && passRef(node)}
 				onSubmit={(e) => {
 					if(onSubmit /*if I pass in a func, then override fo me*/) {
-							e.preventDefault();
+						e.preventDefault();
 						onSubmit(e);
 					}
 				}}

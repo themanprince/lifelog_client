@@ -27,6 +27,7 @@
 	}
 	
 	.card > *:nth-child(1) {
+		order: var(--first-one-order);
 		align-self: center;
 	}
 

@@ -1,8 +1,7 @@
 :root {
 	/*color shit*/
-	--theme-hue: 134;
-	--first-color: #00aced/*hsl(var(--theme-hue), 70%, 60%)*/;
-	--second-color: hsl(var(--theme-hue), 50%, 40%);
+	--first-color: #0099ff/*hsl(var(--theme-hue), 70%, 60%)*/;
+	--second-color: #323232;
 	--form-padding: 30px;
 	--input-color: rgba(0, 0, 0, .05);
 	--form-bg-on-desktop-view: #f2f2f2;

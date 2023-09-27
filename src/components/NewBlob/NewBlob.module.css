@@ -1,0 +1,18 @@
+.contain {
+	background-repeat: no-repeat;
+	background-size: 140%;
+	background-position: center;
+	padding: 2rem;
+	inline-size: fit-content;
+	block-size: fit-content;
+}
+.one {
+	background-image: url("./blobs/1.svg");
+}
+
+.two {
+	background-image: url("./blobs/2.svg");
+}
+.three {
+	background-image: url("./blobs/3.svg");
+}

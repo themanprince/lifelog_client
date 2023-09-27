@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Card from "../../components/Card";
 import SVG from "../../components/SVG";
 import Form from "../../components/Form";
-import Input from "../../components/Input";
+import InputWithKini from "../../components/InputWithKini";
 import TwoInOne from "../../components/TwoInOne";
 import DateWithErrors /*this manages its own state... no lifting*/ from "../../components/DateWithErrors";
 import InputWithExtra from "../../components/InputWithExtra";
@@ -235,28 +235,29 @@ export default class Register extends Component {
 		<Card>
 			<SVG />
 			<Form action={`http://${SERVER_HOST}:${SERVER_PORT}/register`} formName="SIGN UP" passRef={this.passRef} onSubmit={this.validateForm}>
-				<Input name="email" title="E-mail" type="email" value={this.state.email} errorMsgs={this.state.errorMsgs["email"]} onChange={this.onInputChange("email")} />
+				<InputWithKini name="email" title="E-mail" type="email" value={this.state.email} errorMsgs={this.state.errorMsgs["email"]} onChange={this.onInputChange("email")} />
 				
 				<TwoInOne>
-					<Input name="fname" title="First Name" value={this.state.fname} errorMsgs={this.state.errorMsgs["fname"]} onChange={this.onInputChange("fname")} />
-					<Input name="lname" title="Last Name"  value={this.state.lname} errorMsgs={this.state.errorMsgs["lname"]} onChange={this.onInputChange("lname")} />
+					<InputWithKini name="fname" title="First Name" value={this.state.fname} errorMsgs={this.state.errorMsgs["fname"]} onChange={this.onInputChange("fname")} />
+					<InputWithKini name="lname" title="Last Name"  value={this.state.lname} errorMsgs={this.state.errorMsgs["lname"]} onChange={this.onInputChange("lname")} />
 				</TwoInOne>
 				
 				<TwoInOne>
-					<Input name="password" title="Password" type="password"  value={this.state.password} errorMsgs={this.state.errorMsgs["password"]} onChange={this.onInputChange("password")} />
-					<Input title="Confirm Password" type="password"  value={this.state.confPassword} onChange={this.onInputChange("confPassword")} />
+					<InputWithKini name="password" title="Password" type="password"  value={this.state.password} errorMsgs={this.state.errorMsgs["password"]} onChange={this.onInputChange("password")} />
+					<InputWithKini title="Confirm Password" type="password"  value={this.state.confPassword} onChange={this.onInputChange("confPassword")} />
 				</TwoInOne>
 				
 				<DateWithErrors ref={(obj) => this.#dateRef = obj} title="Date Of Birth" dateFormat={[2, 2, 4]} seperator="/" formatString="dd/mm/yyyy"/>
 				
 				<InputWithExtra firstName="secQuestion" firstTitle="Security Question (Optional)" secondName="secAnswer" secondTitle="Answer" />
 				
-				<Button type="submit">Sign Up</Button>
+				<Button type="submit" inlineSize="100%" color="#ffffff" backgroundColor="var(--first-color)" borderRadius=".8rem" >Sign Up</Button>
 				
 				<div className="hac">Already Have An Account? <Link to="/login">Click Here</Link> to Log In</div>
 				<br/>
 			</Form>
-		</Card>);
+		</Card>
+		);
 	}
 
 }

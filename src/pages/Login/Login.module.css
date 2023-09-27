@@ -1,0 +1,20 @@
+.hac, .forgot-pass {
+	font-size: .8rem;
+	opacity: .9;
+}
+
+.hac {
+	text-align: center;
+	color: white;
+	line-height: 1rem;
+}
+
+.forgot-pass {
+	text-align: end;
+	color: var(--second-color);
+}
+
+.link {
+	text-decoration: none;
+	color: inherit;
+}

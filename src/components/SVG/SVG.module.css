@@ -1,6 +1,6 @@
 .svg-contain {
 	--bg-height: 15vh; /*for that absolutely positioned div that forms the bg*/
-	--blob-distance-from-top: calc(var(--bg-height) * (60/100)); /*20% of bg height... cus blobs absolutely positioned*/
+	--blob-distance-from-top: calc(var(--bg-height) * (60/100));
 	--size-of-bottom-margin: 70px;
 	
 	block-size: calc(var(--bg-height) + var(--size-of-bottom-margin));

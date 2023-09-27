@@ -1,0 +1,16 @@
+.chaidDiv {
+	background-color: var(--second-color);
+	padding-block: 5vh;
+}
+
+.chaidDiv > * {
+	inline-size: fit-content;
+	margin-inline: auto;
+	margin-block-start: 20%;
+}
+
+@media(min-width: 500px) {
+	.SVG {
+		display: none;
+	}
+}
