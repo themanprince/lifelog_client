@@ -11,6 +11,9 @@ import {ReactComponent as LifeSVG} from "./one.svg";
 import {SERVER_HOST, SERVER_PORT} from "../../LLConstants.js";
 
 export default class Login extends Component {
+	
+	#msg; //this will store msgs passed in URL for rendering... I didn't want to store it in state
+	
 	constructor(props) {
 		super(props);
 		
@@ -19,14 +22,18 @@ export default class Login extends Component {
 			"password": []
 		};
 		
-		//tryna see if any errors passed thru url
 		const params = new URLSearchParams(window.location.search);
+		
+		//tryna see if any errors passed thru url
 		const emailErr = params.get("emailErr");
 		const passwordErr = params.get("passwordErr");
 		
 		emailErr && errorMsgs["email"].push(emailErr);
 		passwordErr && errorMsgs["password"].push(passwordErr);
 		
+		const msg = params.get("msg");
+		if(msg)
+			this.#msg = msg;
 		
 		this.state = {
 			errorMsgs,
@@ -50,12 +57,17 @@ export default class Login extends Component {
 		return (
 			<Card shouldFlip={true}>
 				<NewWave mobileBlockSize="20vh" waveIndex="1">
-					<div className={LoginStyle["hac"]}>
-						Don't Have an Account?<br/>
-						<Button inlineSize="100%" backgroundColor="var(--second-color)" color="#ffffff" borderRadius="1rem">
-							<Link className={LoginStyle["link"]} to="/register">Sign Up</Link>
-						</Button>
-					</div>
+					{this.#msg && (
+						<div className={`text-info text-uppercase ${LoginStyle["hac"]}`}>{this.#msg}</div>
+					)}
+					{!this.#msg && (
+						<div className={LoginStyle["hac"]}>
+							Don't Have an Account?<br/>
+							<Button inlineSize="100%" backgroundColor="var(--second-color)" color="#ffffff" borderRadius="1rem">
+								<Link className={LoginStyle["link"]} to="/register">Sign Up</Link>
+							</Button>
+						</div>
+					)}
 				</NewWave>
 				<Form action={`http://${SERVER_HOST}:${SERVER_PORT}/login`}>
 					<br/>
