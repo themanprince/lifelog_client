@@ -249,7 +249,7 @@ export default class Register extends Component {
 				
 				<DateWithErrors ref={(obj) => this.#dateRef = obj} title="Date Of Birth" dateFormat={[2, 2, 4]} seperator="/" formatString="dd/mm/yyyy"/>
 				
-				<InputWithExtra firstName="secQuestion" firstTitle="Security Question (Optional)" secondName="secAnswer" secondTitle="Answer" />
+				<InputWithExtra firstName="sec_question" firstTitle="Security Question (Optional)" secondName="sec_answer" secondTitle="Answer" />
 				
 				<Button type="submit" inlineSize="100%" color="#ffffff" backgroundColor="var(--first-color)" borderRadius=".8rem" >Sign Up</Button>
 				

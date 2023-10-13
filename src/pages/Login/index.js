@@ -24,13 +24,6 @@ export default class Login extends Component {
 		
 		const params = new URLSearchParams(window.location.search);
 		
-		//tryna see if any errors passed thru url
-		const emailErr = params.get("emailErr");
-		const passwordErr = params.get("passwordErr");
-		
-		emailErr && errorMsgs["email"].push(emailErr);
-		passwordErr && errorMsgs["password"].push(passwordErr);
-		
 		const msg = params.get("msg");
 		if(msg)
 			this.#msg = msg;
@@ -53,6 +46,34 @@ export default class Login extends Component {
 		}
 	}
 	
+	#onSubmit = (e) => {
+		//gon make the request
+		const {email, password} = this.state;
+		const reqOptions = {
+			"method": "POST",
+			"body": JSON.stringify({email, password}),
+			"headers": {
+				"Content-Type": "application/json"
+			}
+		};
+		const reqObj = new Request(`http://${SERVER_HOST}:${SERVER_PORT}/login`, reqOptions);
+		
+		fetch(reqObj).then(res => {
+			switch(res.status) {
+				case 401:
+					res.json().then(obj => {
+						const {type, msg} = obj;
+						this.setState(prevState => {
+							const aCopy /*a copy*/ = {...prevState};
+							aCopy.errorMsgs[type.toLowerCase().replace("err", "")] = [msg]; //an array with only one kini cus of the nature of InputKiniBase class
+							return aCopy;
+						});
+					});
+					break;
+			}
+		});
+	}
+
 	render() {
 		return (
 			<Card shouldFlip={true}>
@@ -69,7 +90,7 @@ export default class Login extends Component {
 						</div>
 					)}
 				</NewWave>
-				<Form action={`http://${SERVER_HOST}:${SERVER_PORT}/login`}>
+				<Form onSubmit={this.#onSubmit}>
 					<br/>
 					<br/>
 					<div className={LoginStyle["desktop-blob"]}>
