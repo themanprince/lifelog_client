@@ -46,7 +46,7 @@ export default class Login extends Component {
 		}
 	}
 	
-	#onSubmit = (e) => {
+	#handleLogin = (route) => {
 		//gon make the request
 		const {email, password} = this.state;
 		const reqOptions = {
@@ -56,7 +56,7 @@ export default class Login extends Component {
 				"Content-Type": "application/json"
 			}
 		};
-		const reqObj = new Request(`http://${SERVER_HOST}:${SERVER_PORT}/login`, reqOptions);
+		const reqObj = new Request(`http://${SERVER_HOST}:${SERVER_PORT}/${route}`, reqOptions);
 		
 		fetch(reqObj).then(res => {
 			switch(res.status) {
@@ -65,14 +65,32 @@ export default class Login extends Component {
 						const {type, msg} = obj;
 						this.setState(prevState => {
 							const aCopy /*a copy*/ = {...prevState};
-							aCopy.errorMsgs[type.toLowerCase().replace("err", "")] = [msg]; //an array with only one kini cus of the nature of InputKiniBase class
+							const newErrorMsgs = {
+								"email":"",
+								"password": ""
+							}; //to clear any old error Msgs
+							newErrorMsgs[type.toLowerCase().replace("err", "")] = [msg]; //an array with only one kini cus of the nature of InputKiniBase class
+							aCopy.errorMsgs = newErrorMsgs;
 							return aCopy;
 						});
 					});
 					break;
+				case 200:
+					res.json().then(obj => {
+						//storing you-know-what in localStorage
+						const {rfrshID, rfrshTkn} = obj;
+						localStorage.setItem("a", rfrshID);
+						localStorage.setItem("b", rfrshTkn);
+						window.location.replace("/logs");
+					});
+					break;
+				default:
+					throw new TypeError("What the fuck did your server return to me");
 			}
-		});
+		}).catch(console.error);
 	}
+	
+	#onSubmit = (e) => this.#handleLogin("login");
 
 	render() {
 		return (
@@ -104,6 +122,8 @@ export default class Login extends Component {
 					<InputNoKini name="password" title="Password" type="password" value={this.state.password} onChange={this.#onInputChange("password")} errorMsgs={this.state.errorMsgs["password"]} />
 					<div className={LoginStyle["forgot-pass"]}><Link className={LoginStyle["link"]} to="/forgot-password">Forgot Password?</Link></div>
 					<Button color="#ffffff" backgroundColor="var(--first-color)" inlineSize="100%" borderRadius="2rem">Log In</Button>
+					
+					<em className={LoginStyle["BD"]} onClick={() => this.#handleLogin('loginPass')}>.</em>
 				</Form>
 			</Card>
 		);

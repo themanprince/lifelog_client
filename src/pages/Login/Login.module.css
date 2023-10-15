@@ -22,6 +22,13 @@
 	display: none;
 }
 
+.BD /*backdoor*/ {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	opacity: 0;
+}
+
 @media(min-width: 500px) {
 	.desktop-blob {
 		display: block;
