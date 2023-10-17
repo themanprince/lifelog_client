@@ -1,14 +1,12 @@
 .row-container {
 	/*abrg nur delete this block abeg*/
-} /*an older me: for the comic effect, I won't... its useless tho.. or is it*/
-.form-container {
-	/*padding whole form left and right*/
-	padding-inline-start: var(--form-padding) !important;
-	padding-inline-end: var(--form-padding) !important;
-	
-}
+} /*an older me: for the comic effect, I won't... its useless tho.. or is it?*/
+
 .form-name { /*dont show in mobile view*/
 	display: none;
+}
+.form-container {
+	padding-inline: var(--form-padding);
 }
 
 @media(min-width: 500px) {

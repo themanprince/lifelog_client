@@ -7,10 +7,3 @@ function makeComponent() {
 	touch "${1}/index.test.js";
 	touch "${1}/${1}.module.css";
 }
-
-declare -a components=(Card SVG Input TwoInOne DateInput InputWithExtra Button Form);
-
-for component in ${components[@]}
-do
-	makeComponent "$component";	
-done;

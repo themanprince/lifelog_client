@@ -1,12 +1,19 @@
 import React from "react";
 import FormStyle from "./Form.module.css";
 
-export default function Form({formName, action, children, onSubmit, passRef}) {
+export default function Form({children, formName, method, action, onSubmit, passRef, modalStyle}) {
+	const modal = {
+		"--bs-gutter-x": "0",
+		"paddingInline": "0",
+		"--form-bg-on-desktop-view" : "none"
+
+	};
+	
 	//passRef is to pass its ref to parent component who wants to control Form submission
 	return (
-		<div className={`container-fluid ${FormStyle["form-container"]}`}>
+		<div style={modalStyle && modal} className={`container-fluid ${FormStyle["form-container"]}`}>
 			<form
-				method="POST"
+				method={method || "POST"}
 				action={action}
 				ref={(node) => passRef && passRef(node)}
 				onSubmit={(e) => {

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Logs from "./pages/Logs";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 //styling
@@ -17,6 +18,7 @@ root.render(
 			<Routes>
 				<Route exact path="/register" Component={Register} />
 				<Route exact path="/login" Component={Login} />
+				<Route exact path="/logs" Component={Logs} />
 			</Routes>
 		</Router>
 	</>
