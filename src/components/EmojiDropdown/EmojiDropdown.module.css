@@ -1,0 +1,44 @@
+.dropdown-pane {
+	--drop-height: 0;
+	position: relative; /*so the absolutely positioned .drop don't drop off it */
+}
+
+.always-visible,  .dropdown-pane:hover > .drop {
+	border-radius: 1rem;
+	padding-block: .2rem;
+	padding-inline: .5rem;
+}
+.drop {
+	block-size: var(--drop-height);
+	overflow: hidden;
+	transition-property: block-size;
+	transition-duration: 1s;
+	text-align: justify;
+	font-size: 1rem;
+	position: absolute;
+	background-color: white;
+	z-index: calc(var(--modal-z-index) + 1);
+}
+
+.dropdown-pane:hover > .drop {
+	--drop-height: auto; /*magic*/
+	box-shadow: 0 0 1.3rem .1rem rgba(50, 50, 50, .4);
+}
+
+.drop > span:active {
+	--drop-height: 0;
+}
+.text {
+	font-size: var(--text-size);
+	opacity: var(--text-opacity);
+}
+.emoji {
+	font-size: 1rem; /*trusted cascading so I don't have to write same props many times
+	.emoji and .text are shared by one element in...*/
+}
+.always-visible {
+	border: 1px solid rgba(50, 50, 50, .5);
+}
+.arrow {
+	float: right;
+}

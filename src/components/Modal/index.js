@@ -16,7 +16,7 @@ export default class Modal extends Component {
 						<img alt="LifeLog Logo" src="LL_Logo.png" className={ModalStyle["LLLogo"]}/>
 						<img ref={(node) => this.#closeBtnRef = node} alt="close button" src="close_btn.png" className={ModalStyle["closeBtn"]} />
 					</div>
-					<div className={ModalStyle["inside-kini"]}>
+					<div>
 						{children}
 					</div>
 				</div>

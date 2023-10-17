@@ -2,12 +2,12 @@ import React from "react";
 import InputKiniBase from "../InputKiniBase";
 
 export default function InputNoKini(props) {
-	const wholeShitInputStyle = {
+	const wholeShitStyle = {
 		"inlineSize": "100%"
 	};
 	const inputTitleStyle = {
-		"fontSize": ".8rem",
-		"opacity": ".9"
+		"fontSize": "var(--text-size)",
+		"opacity": "var(--text-opacity)"
 	};
 	const inputInputStyle = {
 		...inputTitleStyle,
@@ -18,7 +18,7 @@ export default function InputNoKini(props) {
 	};
 	
 	return <InputKiniBase {...props}
-		wholeShitInputStyle={wholeShitInputStyle}
+		wholeShitStyle={wholeShitStyle}
 		inputTitleStyle={inputTitleStyle}
 		inputInputStyle={inputInputStyle}
 	/>;

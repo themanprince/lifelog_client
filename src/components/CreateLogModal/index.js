@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import Modal from "../Modal";
 import Form from "../Form";
+import EmojiDropdown from "../EmojiDropdown";
 import PropTypes from "prop-types";
+import CLMStyle from "./CreateLogModal.module.css";
 
 export default class CreateLogModal extends Component {
 	render() {
@@ -10,8 +12,8 @@ export default class CreateLogModal extends Component {
 		return (
 			<Modal show={show}>
 				<Form modalStyle={true} method={method || "POST"} action={action}>
-					<h2>Create Log</h2>
-					<h2>Fuck Yo Self</h2>
+					<h2 className={CLMStyle["header"]}>Create Log</h2>
+					<EmojiDropdown title="Mood"/>
 				</Form>
 			</Modal>
 		);

@@ -2,6 +2,8 @@
 	/*color shit*/
 	--first-color: #0099ff/*hsl(var(--theme-hue), 70%, 60%)*/;
 	--second-color: #323232;
+	--text-size: .8rem;
+	--text-opacity: .9;
 	--form-padding: 30px;
 	--input-color: rgba(0, 0, 0, .05);
 	--form-bg-on-desktop-view: #f2f2f2;

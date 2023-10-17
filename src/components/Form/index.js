@@ -4,7 +4,7 @@ import FormStyle from "./Form.module.css";
 export default function Form({children, formName, method, action, onSubmit, passRef, modalStyle}) {
 	const modal = {
 		"--bs-gutter-x": "0",
-		"paddingInline": "0",
+		"--form-padding": "0",
 		"--form-bg-on-desktop-view" : "none"
 
 	};

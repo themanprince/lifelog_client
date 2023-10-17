@@ -6,8 +6,8 @@ export default function InputWithKini(props) {
 		"inlineSize": "100%"
 	};
 	const inputTitleStyle = {
-		"fontSize": ".8rem",
-		"opacity": ".9"
+		"fontSize": "var(--text-size)",
+		"opacity": "var(--text-opacity)"
 	};
 	const inputInputStyle = {
 		...inputTitleStyle,

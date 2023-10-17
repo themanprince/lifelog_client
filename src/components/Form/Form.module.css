@@ -6,7 +6,7 @@
 	display: none;
 }
 .form-container {
-	padding-inline: var(--form-padding);
+	padding-inline: var(--form-padding) !important;
 }
 
 @media(min-width: 500px) {
