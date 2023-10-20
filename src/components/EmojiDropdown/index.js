@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import EDDStyle from "./EmojiDropdown.module.css";
+import PropTypes from "prop-types";
 
 export default class EmojiDropdown extends Component {
 	
@@ -21,35 +22,44 @@ export default class EmojiDropdown extends Component {
 		const {title} = props;
 		//gon be lifting state up tho, so form can be submitted
 		this.state = {
-			"curr": `Please Select A ${title}`
+			"curr": `Please Select A ${title}`,
+			"isOpen": false
 		};
 	}
 	
-	/*#closeFunc = (e) => {
-		//first check if it was an emoji that was clicked or it was dropdown button
-		const {textContent} = e.target;
-		if(textContent && (textContent in this.#emojiArr))
-			
+	#openDrop = () => this.setState({"isOpen": true});
+	
+	#closeDrop = (kini) => {
+		this.setState(prevState => {
+			return {
+				"curr": kini || prevState.curr,
+				"isOpen": false
+			};
+		});
 	}
-	*/
+	
 	render() {
 		const {title} = this.props;
-		const {curr} = this.state;
+		const {curr, isOpen} = this.state;
 		return (
 			<div className={EDDStyle["whole-kini"]}>
-				<span className={EDDStyle["text"]}>{title}</span><br/>
-				<div className={EDDStyle["dropdown-pane"]} /*onClick={this.#closeFunc}*/>
-					<div className={EDDStyle["always-visible"]}>
+				<span className="LLtext">{title}</span><br/>
+				<div className={EDDStyle["dropdown"]}>
+					<div className={EDDStyle["always-visible"]} onBlur={() => this.#closeDrop()} onClick={() => this.#openDrop()} onMouseOver={() => this.#openDrop()} onMouseOut={() => this.#closeDrop()} onTouchStart={() => this.#openDrop()} onTouchEnd={() => this.#closeDrop()}>
 						<span className={`${EDDStyle["text"]} ${EDDStyle["emoji"]}`}>{curr}</span>
 						<span className={EDDStyle["arrow"]}>&#9660;</span>
 					</div>
-					<div className={EDDStyle["drop"]}>
+					<div className={`${EDDStyle["drop"]} ${(isOpen)? EDDStyle["drop-open"] : EDDStyle["drop-closed"]}`}>
 						{this.#emojiArr.map((kini, key) => (
-							<span key={key} onClick={() => this.setState({"curr": kini})}>{kini}</span>
+							<span key={key} onClick={() => this.#closeDrop(kini)}>{kini}</span>
 						))}
 					</div>
 				</div>
 			</div>
 		);
 	}
+}
+
+EmojiDropdown.propTypes = {
+	"title": PropTypes.string.isRequired
 }

@@ -1,7 +1,10 @@
+//controls
 import React, {Component} from "react";
 import Modal from "../Modal";
 import Form from "../Form";
 import EmojiDropdown from "../EmojiDropdown";
+import AntManTextField from "../AntManTextField";
+//other kini
 import PropTypes from "prop-types";
 import CLMStyle from "./CreateLogModal.module.css";
 
@@ -14,6 +17,7 @@ export default class CreateLogModal extends Component {
 				<Form modalStyle={true} method={method || "POST"} action={action}>
 					<h2 className={CLMStyle["header"]}>Create Log</h2>
 					<EmojiDropdown title="Mood"/>
+					<AntManTextField title="Text"/>
 				</Form>
 			</Modal>
 		);

@@ -8,6 +8,7 @@
 	--input-color: rgba(0, 0, 0, .05);
 	--form-bg-on-desktop-view: #f2f2f2;
 	--modal-z-index: 1;
+	--secret-ingredient-z-index: -1;
 }
 
 * {
@@ -26,6 +27,11 @@ body {
 .red > span {
 	color: rgba(234, 10, 10, .7);
 	font-size: .7rem;
+}
+
+.LLtext { /*for text style across LL*/
+	font-size: var(--text-size);
+	opacity: var(--text-opacity);
 }
 
 /*next is that class for shi like 'don't have an account, click here to register'*/

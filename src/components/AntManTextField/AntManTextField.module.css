@@ -1,0 +1,31 @@
+.contain {
+	position: relative; /*so absolutely positioned secret-ingredient go still dey... you dey get me my guy*/
+}
+.dotdotdot {
+	inline-size: 2rem;
+}
+.textarea {
+	resize: none; /*so the user don't bitch on my feature*/
+	border: none;
+	border-block-end: 1px solid var(--second-color);
+}
+.textarea:focus {
+	outline: none;
+}
+.textarea, .secret-ingredient {
+	inline-size: 100%;
+	padding: .4rem; /*very important for behavior*/
+	padding-block-end: 0;
+	padding-inline: .1rem;
+}
+.secret-ingredient {
+	block-size: auto;
+	overflow: auto;
+	overflow-wrap: break-word;
+	border: 1px solid var(--second-color);
+	/*trying to take it out, while still keeping it in... ivunowodamin*/
+	position: absolute;
+	transform: translateY(-100%);
+	z-index: var(--secret-ingredient-z-index);
+	opacity: 0 !important;
+}
