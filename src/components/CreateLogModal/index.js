@@ -4,6 +4,8 @@ import Modal from "../Modal";
 import Form from "../Form";
 import EmojiDropdown from "../EmojiDropdown";
 import AntManTextField from "../AntManTextField";
+import AudioRecorder from "../AudioRecorder";
+import VideoRecorder from "../VideoRecorder";
 //other kini
 import PropTypes from "prop-types";
 import CLMStyle from "./CreateLogModal.module.css";
@@ -18,6 +20,8 @@ export default class CreateLogModal extends Component {
 					<h2 className={CLMStyle["header"]}>Create Log</h2>
 					<EmojiDropdown title="Mood"/>
 					<AntManTextField title="Text"/>
+					<AudioRecorder/>
+					<VideoRecorder/>
 				</Form>
 			</Modal>
 		);

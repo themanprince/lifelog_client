@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 //styling
 import './bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

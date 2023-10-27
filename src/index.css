@@ -7,7 +7,11 @@
 	--form-padding: 30px;
 	--input-color: rgba(0, 0, 0, .05);
 	--form-bg-on-desktop-view: #f2f2f2;
+	/*z-indexes*/
 	--modal-z-index: 1;
+	--drop-z-index: calc(var(--modal-z-index) + 1);
+	--video-z-index: calc(var(--drop-z-index) + 1);; /*3 because of the EmojiDropdown which is --modal-z-index + 1*/
+	--video-button-z-index: calc(var(--video-z-index) + 1);;
 	--secret-ingredient-z-index: -1;
 }
 
@@ -19,6 +23,19 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+}
+
+.media-icon { /*the small circle surrounding media icons on createLogModal*/
+	text-align: center;
+	border-radius: 100%;
+	inline-size: 2rem;
+	block-size: 2rem;
+	box-shadow: var(--bs-box-shadow);
+}
+
+.media-icon > i { /*the icon it holds*/
+	font-size: 1rem;
+	vertical-align: middle;
 }
 
 .red { /*for error panes in input fields*/

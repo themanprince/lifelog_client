@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	inline-size: 100%;
+	block-size: 100%;
+}
+.video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: var(--video-z-index);
+	inline-size: 100%;
+	block-size: 100%;
+}
+.the-button {
+	position: relative;/*so z-index can z-index;*/
+	inline-size: 3rem !important;
+	block-size: 3rem !important;
+	background-color: #fff;
+	z-index: var(--video-button-z-index);
+}
+
+.the-button > i {
+	color: var(--bs-red);
+	font-size: 1.85rem !important;
+}
