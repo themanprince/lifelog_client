@@ -23,55 +23,55 @@ export default class VideoRecorder extends Component {
 	
 	#setupRecorder = async () => { //gon return the stream so we can set the video kini to it
 		const {mediaDevices} = navigator;
-			if(! (mediaDevices && mediaDevices.getUserMedia && MediaRecorder))
-				return this.setState({
-					"canRecord": false
-				});
+		if(! (mediaDevices && mediaDevices.getUserMedia && MediaRecorder)) {
+			console.error(new Error("API not found - mediaDevices / MediaRecorder / getUserMedia"));
 			
-			try {
-				const constraints = {
-					"audio": true,
-					"video": true
-				};
-				const stream = await mediaDevices.getUserMedia(constraints);
-				this.#recorder = new MediaRecorder(stream);
-				
-				this.#recorder.addEventListener("dataavailable", e => this.#chunks.push(e.data));
-				this.#recorder.addEventListener("stop", () => {
-					this.#recordedBlob = new Blob(this.#chunks, {
-						"type": "video/mp4"
-					});
-					
-					stream.getTracks().forEach(track => track.stop());
-					
-					this.#chunks = [];
+			return this.setState({
+				"canRecord": false
+			});
+		}
+		
+		try {
+			const constraints = {
+				"audio": true,
+				"video": true
+			};
+			const stream = await mediaDevices.getUserMedia(constraints);
+			this.#recorder = new MediaRecorder(stream);
+			
+			this.#recorder.addEventListener("dataavailable", e => this.#chunks.push(e.data));
+			this.#recorder.addEventListener("stop", () => {
+				this.#recordedBlob = new Blob(this.#chunks, {
+					"type": "video/mp4"
 				});
 				
-				return stream;
+				stream.getTracks().forEach(track => track.stop());
 				
-			} catch(err) {
-				console.error(err);
-				
-				this.setState({
-					"canRecord": false
-				});
-				
-			}
+				this.#chunks = [];
+			});
+			
+			return stream;
+			
+		} catch(err) {
+			console.error(err);
+			
+			this.setState({
+				"canRecord": false
+			});
+			
+		}
 			
 	}
 	
 	#onClickSmallButton = async (e /*just being pragmatic*/) => {
-		console.group("got to onClickSmallButton");
 		const stream = await this.#setupRecorder(); //this returns the stream... yea, of course
 		
-		console.log("just got stream, this.#videoComponentRef is ", this.#videoComponentRef);
-		console.log("stream is ", stream);
 		this.#videoComponentRef.srcObject = stream;
 		
 		this.setState({
 			"videoDisplay": "flex"
 		});
-		console.groupEnd();
+		
 	}
 	
 	#onClickBigButton = (e /*just being pragmatic*/) => {

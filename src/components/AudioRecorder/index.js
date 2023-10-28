@@ -21,10 +21,13 @@ export default class AudioRecorder extends Component {
 		
 		const {mediaDevices} = navigator;
 		
-		if(!(mediaDevices && mediaDevices.getUserMedia && MediaRecorder))
+		if(!(mediaDevices && mediaDevices.getUserMedia && MediaRecorder)) {
+			 console.error(new Error("API not found - mediaDevices / MediaRecorder / getUserMedia"));
+			 
 			 return this.setState({
 				"canRecord": false
 			});
+		}
 			
 		try {		
 			const constraints = {

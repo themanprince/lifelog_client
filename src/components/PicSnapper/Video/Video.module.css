@@ -6,7 +6,7 @@
 	inline-size: 100%;
 	block-size: 100%;
 }
-.video {
+.videoOrImg {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -14,19 +14,12 @@
 	inline-size: 100%;
 	block-size: 100%;
 }
-
-.under-kini {
-	z-index: var(--video-button-z-index);
-}
-.under-kini > * {
-	margin-inline: auto;
-}
-
 .the-button {
 	position: relative;/*so z-index can z-index;*/
 	inline-size: 3rem !important;
 	block-size: 3rem !important;
 	background-color: #fff;
+	z-index: var(--video-button-z-index);
 }
 
 .the-button > i {

@@ -6,6 +6,7 @@ import EmojiDropdown from "../EmojiDropdown";
 import AntManTextField from "../AntManTextField";
 import AudioRecorder from "../AudioRecorder";
 import VideoRecorder from "../VideoRecorder";
+import PicSnapper from "../PicSnapper";
 //other kini
 import PropTypes from "prop-types";
 import CLMStyle from "./CreateLogModal.module.css";
@@ -22,6 +23,7 @@ export default class CreateLogModal extends Component {
 					<AntManTextField title="Text"/>
 					<AudioRecorder/>
 					<VideoRecorder/>
+					<PicSnapper/>
 				</Form>
 			</Modal>
 		);
