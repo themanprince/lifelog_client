@@ -15,9 +15,7 @@
 	block-size: 100%;
 }
 
-.under-kini {
-	z-index: var(--video-button-z-index);
-}
+
 .under-kini > * {
 	margin-inline: auto;
 }

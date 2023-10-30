@@ -7,6 +7,7 @@ import AntManTextField from "../AntManTextField";
 import AudioRecorder from "../AudioRecorder";
 import VideoRecorder from "../VideoRecorder";
 import PicSnapper from "../PicSnapper";
+import TwoInOne from "../TwoInOne";
 //other kini
 import PropTypes from "prop-types";
 import CLMStyle from "./CreateLogModal.module.css";
@@ -20,10 +21,16 @@ export default class CreateLogModal extends Component {
 				<Form modalStyle={true} method={method || "POST"} action={action}>
 					<h2 className={CLMStyle["header"]}>Create Log</h2>
 					<EmojiDropdown title="Mood"/>
-					<AntManTextField title="Text"/>
-					<AudioRecorder/>
-					<VideoRecorder/>
-					<PicSnapper/>
+					
+					<TwoInOne isRow={false /*pragmatics sake*/}>
+						<AntManTextField title="Text"/>
+						<div className="d-flex flex-row justify-content-end">
+							<AudioRecorder/>
+							<VideoRecorder/>
+							<PicSnapper/>
+						</div>
+					</TwoInOne>
+					
 				</Form>
 			</Modal>
 		);

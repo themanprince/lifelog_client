@@ -86,7 +86,7 @@ export default class AudioRecorder extends Component {
 					<i className={`bi-mic-fill ${AudioRecorderStyle[(isRecording)? "on-mic" :"off-mic"]}`} onClick={this.#clickHandler}></i>
 				</div>
 					{ (canRecord) ? 
-						<span className="LLtext text-danger">{isRecording && "Recording..."}</span>
+						<span className="LLtext text-danger">{isRecording && "Recording"}</span>
 						:
 						<div className="red"><span>Unable to Record</span></div>
 					}

@@ -25,16 +25,28 @@ body {
   padding: 0;
 }
 
+.under-kini { /*the container for video buttons*/
+	z-index: var(--video-button-z-index);
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .media-icon { /*the small circle surrounding media icons on createLogModal*/
 	text-align: center;
 	border-radius: 100%;
-	inline-size: 2rem;
-	block-size: 2rem;
+	inline-size: 1.7rem;
+	block-size: 1.7rem;
+	margin-inline: .2rem;
 	box-shadow: var(--bs-box-shadow);
 }
 
 .media-icon > i { /*the icon it holds*/
-	font-size: 1rem;
+	font-size: .8rem;
 	vertical-align: middle;
 }
 

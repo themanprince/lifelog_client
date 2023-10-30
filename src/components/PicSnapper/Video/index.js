@@ -15,9 +15,12 @@ export default function Video(props) {
 	return (
 		<div style={{display}} className={VideoStyle["container"]}>
 			{(showImage) ? <img className={VideoStyle["videoOrImg"]} alt="Ya pishur" ref={(ref) => passImgRef(ref)}/> : (<video autoPlay className={VideoStyle["videoOrImg"]} ref={(ref) => passVideoRef(ref)}></video>)}
-			<div className={`media-icon ${VideoStyle["the-button"]}`}>
-				<i onClick={onClick} className={"bi-camera-fill"}></i>
+			<div className="under-kini">
+				<div className={`media-icon ${VideoStyle["the-button"]}`}>
+					<i onClick={onClick} className={"bi-camera-fill"}></i>
+				</div>
 			</div>
+			
 		</div>
 	);
 }

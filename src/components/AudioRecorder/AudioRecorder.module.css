@@ -2,6 +2,7 @@
 	display: inline-flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: flex-end;
 }
 .on-mic {
 	color: red;

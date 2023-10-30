@@ -237,12 +237,12 @@ export default class Register extends Component {
 			<Form action={`http://${SERVER_HOST}:${SERVER_PORT}/register`} formName="SIGN UP" passRef={this.passRef} onSubmit={this.validateForm}>
 				<InputWithKini name="email" title="E-mail" type="email" value={this.state.email} errorMsgs={this.state.errorMsgs["email"]} onChange={this.onInputChange("email")} />
 				
-				<TwoInOne>
+				<TwoInOne isRow={true}>
 					<InputWithKini name="fname" title="First Name" value={this.state.fname} errorMsgs={this.state.errorMsgs["fname"]} onChange={this.onInputChange("fname")} />
 					<InputWithKini name="lname" title="Last Name"  value={this.state.lname} errorMsgs={this.state.errorMsgs["lname"]} onChange={this.onInputChange("lname")} />
 				</TwoInOne>
 				
-				<TwoInOne>
+				<TwoInOne isRow={true}>
 					<InputWithKini name="password" title="Password" type="password"  value={this.state.password} errorMsgs={this.state.errorMsgs["password"]} onChange={this.onInputChange("password")} />
 					<InputWithKini title="Confirm Password" type="password"  value={this.state.confPassword} onChange={this.onInputChange("confPassword")} />
 				</TwoInOne>
