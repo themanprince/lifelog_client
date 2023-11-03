@@ -8,6 +8,7 @@ import AudioRecorder from "../AudioRecorder";
 import VideoRecorder from "../VideoRecorder";
 import PicSnapper from "../PicSnapper";
 import TwoInOne from "../TwoInOne";
+import MediaWidget from "../MediaWidget";
 //other kini
 import PropTypes from "prop-types";
 import CLMStyle from "./CreateLogModal.module.css";
@@ -30,7 +31,11 @@ export default class CreateLogModal extends Component {
 							<PicSnapper/>
 						</div>
 					</TwoInOne>
-					
+					<div className="d-flex justify-content-around">
+					<MediaWidget type="audio" title="Audio1"/>
+					<MediaWidget type="video" title="Video1"/>
+					<MediaWidget type="img" title="Img1"/>
+					</div>
 				</Form>
 			</Modal>
 		);

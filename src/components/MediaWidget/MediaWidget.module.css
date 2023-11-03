@@ -1,0 +1,18 @@
+.big-circle {
+	box-shadow: -0.05rem .05rem .2rem .005rem rgba(var(--bs-body-color-rgb), 0.1);
+}
+
+.small-circle {
+	--outer-shadow: 0 0 .1rem .03rem rgba(var(--bs-body-color-rgb), 0.1);
+	--inner-shadow: inset 0 0 .7rem 0 rgba(var(--bs-body-color-rgb), 0.01);
+	box-shadow: var(--outer-shadow), var(--inner-shadow);
+	text-align: center;
+}
+.small-circle:active {
+	box-shadow: inset 0 .1rem .1rem .01rem rgba(var(--bs-body-color-rgb), 0.1);
+}
+
+.icon {
+	font-size: 1.6rem;
+	opacity: var(--text-opacity);
+}
