@@ -2,3 +2,19 @@
 	color: var(--second-color);
 	font-weight: lighter;
 }
+
+.media-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 1rem;
+}
+
+.CDM-container > * { /*these media kini dey misbehave well well*/
+	inline-size: 100%;
+}
+
+@media(min-width: 500px) {
+	.media-list {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	}
+}

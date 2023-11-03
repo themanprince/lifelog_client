@@ -89,6 +89,10 @@ export default class PicSnapper extends Component {
 		//saving blob
 		this.#snappedBlob = await (new Promise((res, rej) => cv.toBlob(res)));
 		
+		//setting the parent state to indicate new media
+		this.props.addMedia("img", this.#snappedBlob);
+		
+		
 		//handling display of the image since pic has been taken
 		this.setState({
 			"showImage": true

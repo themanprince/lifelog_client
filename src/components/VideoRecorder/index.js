@@ -44,7 +44,9 @@ export default class VideoRecorder extends Component {
 				this.#recordedBlob = new Blob(this.#chunks, {
 					"type": "video/mp4"
 				});
-				
+				//setting the parent state to indicate new media
+				this.props.addMedia("video", this.#recordedBlob);
+				//stopping stream next
 				stream.getTracks().forEach(track => track.stop());
 				
 				this.#chunks = [];

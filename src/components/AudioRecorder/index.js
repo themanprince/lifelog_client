@@ -43,6 +43,8 @@ export default class AudioRecorder extends Component {
 				this.#recordedBlob = new Blob(this.#chunks, {
 					"type": "audio/mp3, codecs=opus"
 				});
+				//setting the parent state tp indicate new media
+				this.props.addMedia("audio", this.#recordedBlob);
 				stream.getTracks().forEach(track => track.stop());
 				//new chunks
 				this.#chunks = [];
