@@ -15,8 +15,7 @@
 
 .container-kini {
 	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 3.5%;
 	border-radius: .8rem;
 	background-color: #fff;
 	padding-block: 5%;

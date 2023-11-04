@@ -159,7 +159,7 @@ export default class CreateLogModal extends Component {
 		
 		//next, setting CDMNodeRef src attribute only if state change was caused by CDM change
 		if(this.#canSetCDMSrc && (this.#CDMNodeRef !== undefined)) {
-			this.#CDMNodeRef.src = this.state.CDM.blob; //TODO
+			this.#CDMNodeRef.src = URL.createObjectURL(this.state.CDM.blob);
 			this.#canSetCDMSrc = false; //turning off flag
 		}
 	}

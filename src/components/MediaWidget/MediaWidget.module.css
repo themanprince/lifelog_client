@@ -3,8 +3,8 @@
 }
 
 .small-circle {
-	--outer-shadow: 0 0 .1rem .03rem rgba(var(--bs-body-color-rgb), 0.1);
-	--inner-shadow: inset 0 0 .7rem 0 rgba(var(--bs-body-color-rgb), 0.01);
+	--outer-shadow: 0 0 .1rem .03rem rgba(var(--first-color), 0.1);
+	--inner-shadow: inset 0 0 .7rem 0 rgba(var(--first-color), 0.01);
 	box-shadow: var(--outer-shadow), var(--inner-shadow);
 	text-align: center;
 }

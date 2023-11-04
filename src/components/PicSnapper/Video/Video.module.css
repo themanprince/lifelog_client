@@ -8,11 +8,12 @@
 }
 .videoOrImg {
 	position: fixed;
-	top: 0;
+	top: 50%;
+	transform: translateY(-50%);
 	left: 0;
 	z-index: var(--video-z-index);
 	inline-size: 100%;
-	block-size: 100%;
+	block-size: auto;
 }
 .the-button {
 	position: relative;/*so z-index can z-index;*/
