@@ -9,6 +9,7 @@ import VideoRecorder from "../VideoRecorder";
 import PicSnapper from "../PicSnapper";
 import TwoInOne from "../TwoInOne";
 import MediaWidget from "../MediaWidget";
+import UploadBtn from "./UploadBtn";
 //other kini
 import PropTypes from "prop-types";
 import CLMStyle from "./CreateLogModal.module.css";
@@ -18,6 +19,7 @@ export default class CreateLogModal extends Component {
 	counts;
 	#CDMNodeRef; //ref of node element of currently displayed media
 	#canSetCDMSrc; //will be set to true once CDM is changed, so that src can be set for the new media element
+	#allowedMIMEs; //note the lowercase 's'... smirk.. my keyboard don't have smirk emoji
 	
 	constructor(props) {
 		super(props);
@@ -30,10 +32,23 @@ export default class CreateLogModal extends Component {
 		this.counts = { //for auto-indexing... you'll see what I mean in render()
 			"audio": 0,
 			"video": 0,
-			"img": 0
+			"image": 0
 		};
 		
-		this.#canSetCDMSrc = false;
+		this.#canSetCDMSrc = false; //shek up for a description
+		
+		this.#allowedMIMEs = [
+			"image/jpeg", "image/png",
+			"video/mp4", "video/3gp",
+			"audio/mp3", "audio/wav", "audio/ogg"
+		];
+	}
+	
+	//so in my Form implementation, I made it such that
+	//if a function is passed to onSubmit props, then the form should do e.preventDefault
+	//so I want to make an empty function which I will prolly fill later to pass to my form's onSubmit
+	onSubmitForm = (evt) => {
+		
 	}
 	
 	addMedia = (type, blob) => {
@@ -98,7 +113,7 @@ export default class CreateLogModal extends Component {
 		
 		return (
 			<Modal show={show}>
-				<Form modalStyle={true} method={method || "POST"} action={action}>
+				<Form modalStyle={true} onSubmit={this.onSubmitForm} method={method || "POST"} action={action}>
 					<h2 className={CLMStyle["header"]}>Create Log</h2>
 					<EmojiDropdown title="Mood"/>
 					
@@ -110,7 +125,7 @@ export default class CreateLogModal extends Component {
 							<PicSnapper addMedia={this.addMedia}/>
 						</div>
 					</TwoInOne>
-					{
+					{ //for list of recorded/uploaded media
 						(media.length > 0) && (
 							<div className={CLMStyle["media-list"]}>
 								{
@@ -119,8 +134,7 @@ export default class CreateLogModal extends Component {
 							</div>
 						)
 					}
-					
-					{
+					{ //for currently displayed media
 						CDM &&
 						(<div className={CLMStyle["CDM-container"]}>
 							{
@@ -128,6 +142,10 @@ export default class CreateLogModal extends Component {
 							}
 						</div>)
 					}
+					
+					<div className="d-flex justify-content-between mb-5">
+						<UploadBtn title="Upload" allowedMIMEs={this.#allowedMIMEs} addMedia={this.addMedia}/>
+					</div>
 				</Form>
 			</Modal>
 		);
