@@ -1,5 +1,5 @@
-//controls
 import React, {Component} from "react";
+//controls
 import Modal from "../Modal";
 import Form from "../Form";
 import EmojiDropdown from "../EmojiDropdown";
@@ -21,12 +21,23 @@ export default class CreateLogModal extends Component {
 	#canSetCDMSrc; //will be set to true once CDM is changed, so that src can be set for the new media element
 	#allowedMIMEs; //note the lowercase 's'... smirk.. my keyboard don't have smirk emoji
 	
+	#VTBS; //will be the text values of what is received from each of these controls... for submitting
+	
 	constructor(props) {
 		super(props);
 		
 		this.state = {
 			"media": [], //list of recorded/uploaded media
 			"CDM": null //currently displayed media
+		};
+		
+		this.#VTBS /*ValuesToBeSubmittted.. will be set by each of the components*/ = {
+			//the naming is as it is in server so that it will be easily sent
+			"mood": undefined,
+			"log_text": undefined,
+			"video_url": [],
+			"audio_url": [],
+			"pic_url": []
 		};
 		
 		this.counts = { //for auto-indexing... you'll see what I mean in render()
@@ -51,6 +62,15 @@ export default class CreateLogModal extends Component {
 		
 	}
 	
+	//this next function is for passing set values to the #VTBS field
+	//two orders
+	#passValue = (valName) => (valVal) => {
+		if( ! (valName in this.#VTBS))
+			throw new TypeError(`Prvnce ohh, the valName ${valName} is not a valid key for VTBS`);
+		
+		this.#VTBS[valName] = valVal;
+	}
+	
 	addMedia = (type, blob) => {
 		this.setState((prevState, prevProps) => {
 			const copy = [...prevState.media];
@@ -61,7 +81,7 @@ export default class CreateLogModal extends Component {
 		});
 	}
 	
-	//next is an HOF with order of two
+	//next is an HOF with order of two... ohh, how helpful
 	removeMedia = (idx) => (evt) => {
 		//idx is for index to be removed, evt is for event handler
 		this.setState((prevState, prevProps) => {
@@ -115,10 +135,10 @@ export default class CreateLogModal extends Component {
 			<Modal show={show}>
 				<Form modalStyle={true} onSubmit={this.onSubmitForm} method={method || "POST"} action={action}>
 					<h2 className={CLMStyle["header"]}>Create Log</h2>
-					<EmojiDropdown title="Mood"/>
+					<EmojiDropdown title="Mood" passValue={this.#passValue("mood")}/>
 					
 					<TwoInOne isRow={false /*pragmatics sake*/}>
-						<AntManTextField title="Text"/>
+						<AntManTextField title="Text" passValue={this.#passValue("log_text")}/>
 						<div className="d-flex flex-row justify-content-end">
 							<AudioRecorder addMedia={this.addMedia}/>
 							<VideoRecorder addMedia={this.addMedia}/>

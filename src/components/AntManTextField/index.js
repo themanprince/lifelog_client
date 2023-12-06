@@ -1,22 +1,35 @@
 import React, {Component} from "react";
 import AMTFStyle from "./AntManTextField.module.css";
+import genericDebouncer from "../../my_modules/genericDebouncer";
 import PropTypes from "prop-types";
+import {ANTMAN_TEXTFIELD_DEBOUNCE_TIME} from "../../LLConstants";
+
 
 export default class AntManTextField extends Component {
 	
 	#divRef;
 	#taRef;
+	#passerDebouncer; //check constructor for details on this mofo'
 	
 	constructor(props) {
 		super(props);
 		
+		const {passValue} = this.props;
+		
 		this.state = {
 			"text": ""
 		};
+		//next is the debouncer for the action of passing value to the parent... so that the passValue function won't be called everyttime a user types a char
+		this.#passerDebouncer = genericDebouncer(ANTMAN_TEXTFIELD_DEBOUNCE_TIME, function(textValue) {
+			//whenever this func is called, it does the below
+			passValue(textValue);
+			//which is pass textValue to parent
+		});
 	}
 	
 	#onChange = (e) => {
 		const text = e.target.value;
+		this.#passerDebouncer(text); //already specified the function in the constructor
 		this.setState({text});
 	}
 	
@@ -49,5 +62,6 @@ export default class AntManTextField extends Component {
 }
 
 AntManTextField.propTypes = {
-	"title": PropTypes.string.isRequired
+	"title": PropTypes.string.isRequired,
+	"passValue": PropTypes.func.isRequired
 }
