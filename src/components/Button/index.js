@@ -15,6 +15,6 @@ export default function Button(props) {
 	};
 	
 	return (
-		<button style={specStyle} className={BtnStyle.button} type={type}>{children}</button>	
+		<button style={specStyle} className={BtnStyle.button} type={type}>{children}</button>
 	);
 }

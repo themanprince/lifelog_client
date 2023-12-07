@@ -13,6 +13,11 @@
 	inline-size: 100%;
 }
 
+.submit-button {
+	background-color: var(--first-color);
+	border: 0;
+}
+
 @media(min-width: 500px) {
 	.media-list {
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;

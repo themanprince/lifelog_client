@@ -14,6 +14,13 @@ import UploadBtn from "./UploadBtn";
 import PropTypes from "prop-types";
 import CLMStyle from "./CreateLogModal.module.css";
 
+//this needed for doing notifications in submitting form
+//this for the different types we could have
+const NotifType = {
+	"GREEN": 0,
+	"RED": 1
+};
+
 export default class CreateLogModal extends Component {
 	
 	counts;
@@ -28,7 +35,11 @@ export default class CreateLogModal extends Component {
 		
 		this.state = {
 			"media": [], //list of recorded/uploaded media
-			"CDM": null //currently displayed media
+			"CDM": null, //currently displayed media
+			"notification": { //for displaying information when user tries to submit form
+				"type": NotifType.GREEN,
+				"values": []
+			}
 		};
 		
 		this.#VTBS /*ValuesToBeSubmittted.. will be set by each of the components*/ = {
@@ -59,7 +70,38 @@ export default class CreateLogModal extends Component {
 	//if a function is passed to onSubmit props, then the form should do e.preventDefault
 	//so I want to make an empty function which I will prolly fill later to pass to my form's onSubmit
 	onSubmitForm = (evt) => {
+		//evt has already been preventDefault-ed
 		
+		//first validating that the condition of ,, is true
+		//the conditions that
+		/*
+			1. a mood must be set
+			2. at least one of text, or a media must be added to mood
+		*/
+		
+		const moodIsSet = !!(this.#VTBS["mood"]);
+		const textIsSet = !!(this.#VTBS["log_text"]);
+		const mediaDey = this.state.media.length > 0;
+		
+		//checking conditions... note the '!' in below lines
+		//adding 'em to a list so that I'll just render it
+		const list = [];
+		if(!moodIsSet)
+			list.push("You must select a mood... Yes, na by force");
+		
+		if( ! (textIsSet || mediaDey))
+			list.push("You must add AT LEAST ONE of text, audio, video or picture");
+		
+		//if any of these conditions failed, this form shouldn't submit
+		if( ! (moodIsSet && (textIsSet || mediaDey))) //gon return early next
+			return this.setState({
+				"notification": {
+					'type': NotifType.RED,
+					"values": list
+				}
+			});
+		
+		//TODO - firebase uploading
 	}
 	
 	//this next function is for passing set values to the #VTBS field
@@ -129,7 +171,7 @@ export default class CreateLogModal extends Component {
 	
 	render() {
 		const {show, method, action} = this.props;
-		const {media, CDM} = this.state;
+		const {media, CDM, notification} = this.state;
 		
 		return (
 			<Modal show={show}>
@@ -163,8 +205,18 @@ export default class CreateLogModal extends Component {
 						</div>)
 					}
 					
-					<div className="d-flex justify-content-between mb-5">
+					{
+						//notifications
+						(notification.values.length > 0) && (
+							<div className="red">
+								{ notification.values.map((msg, i) => <span key={i}>* {msg}<br/></span>) }
+							</div>
+						)
+					}
+					
+					<div className="d-flex justify-content-between align-items-center mb-5">
 						<UploadBtn title="Upload" allowedMIMEs={this.#allowedMIMEs} addMedia={this.addMedia}/>
+						<button type="submit" className={`${CLMStyle["submit-button"]} LL-bg-first w-auto rounded-pill text-light px-4 py-2`}>Post Log</button>
 					</div>
 				</Form>
 			</Modal>

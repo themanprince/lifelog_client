@@ -12,7 +12,7 @@
 	--drop-z-index: calc(var(--modal-z-index) + 1);
 	--video-z-index: calc(var(--drop-z-index) + 1);; /*3 because of the EmojiDropdown which is --modal-z-index + 1*/
 	--video-button-z-index: calc(var(--video-z-index) + 1);;
-	--secret-ingredient-z-index: -1;
+	--secret-ingredient-z-index: -1; /*do I gotta tell you what this is, you ant*/
 }
 
 * {
@@ -37,6 +37,7 @@ body {
 }
 
 .media-icon { /*the small circle surrounding media icons on createLogModal*/
+	cursor: pointer;
 	text-align: center;
 	border-radius: 100%;
 	inline-size: 1.7rem;

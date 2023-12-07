@@ -1,4 +1,7 @@
 .button {
 	background-color: var(--second-color) !important;
 	border: 0 !important;
+	padding-block: 0 !important; /*to cancel bootstrap's default padding on .btn classes*/
+	vertical-align: middle;
+	block-size: 1.5rem;
 }
